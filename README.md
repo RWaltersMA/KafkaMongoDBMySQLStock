@@ -17,6 +17,6 @@ If successful you will have the Confluent Portal http://127.0.0.1:9021/
 
 There are two connectors configured one for the local MysQL and one for local MongoDB.  If you connect to the portal you can see a stockdata.stock topic that will contain data from both databases.  These data will be written to MongoDB Atlas (the connection string you supplied on the run command above)
 
-
+![Architecture Diagram](overview.png)
 
 
