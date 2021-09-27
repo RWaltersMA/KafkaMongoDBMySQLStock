@@ -116,7 +116,9 @@ curl -X POST -H "Content-Type: application/json" --data '
      "value.converter.schema.registry.url":"http://schema-registry:8081",
      "transforms": "ExtractField",
      "transforms.ExtractField.type":"org.apache.kafka.connect.transforms.ExtractField$Value",
-     "transforms.ExtractField.field":"after"
+     "transforms.ExtractField.field":"after",
+     "timeseries.timefield":"tx_time",
+     "timeseries.timefield.auto.convert":"true"
 }}' http://localhost:8083/connectors -w "\n"
 
 
@@ -127,7 +129,7 @@ curl -X POST -H "Content-Type: application/json" --data '
 {
   "name": "mysql-connector",
   "config": {
-    "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+        "connector.class": "io.debezium.connector.mysql.MySqlConnector",
     "tasks.max": "1",
     "database.hostname": "mysqlstock",
     "database.port": "3306",
@@ -138,15 +140,10 @@ curl -X POST -H "Content-Type: application/json" --data '
     "database.whitelist": "Stocks",
     "database.history.kafka.bootstrap.servers": "broker:29092",
     "database.history.kafka.topic": "dbhistory.StockData",
-    "include.schema.changes": "false",
-    "include.query": "false",
-    "table.ignore.builtin": "true",
-    "key.converter.schemas.enable": "false",
-    "value.converter.schemas.enable": "false",
-    "gtid.source.filter.dml.events": "true",
-    "tombstones.on.delete": "true",
-    "connect.keep.alive": "true",
-    "snapshot.minimal.locks": "true"
+    "key.converter": "io.confluent.connect.avro.AvroConverter",
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
+    "key.converter.schema.registry.url": "http://schema-registry:8081",
+    "value.converter.schema.registry.url": "http://schema-registry:8081"
   }
 }}' http://localhost:8083/connectors -w "\n"
 
@@ -166,3 +163,5 @@ http://127.0.0.1:9021 on your host/client
 Use <ctrl>-c to quit'''
 
 read -r -d '' _ </dev/tty
+
+
