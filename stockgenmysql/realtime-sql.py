@@ -135,7 +135,7 @@ def worker(workerthread, numofsymbols):
                 x = getvalue(last_value[i])
                 last_value[i] = x
                 txtime = dt.now()
-                addData = ("INSERT INTO StockData (company_symbol, company_name, price, Exchange,tx_time) VALUES (%s, %s, %s, %s)")
+                addData = ("INSERT INTO StockData (company_symbol, company_name, price, Exchange,tx_time) VALUES (%s, %s, %s, %s, %s)")
                 cursor.execute(addData,(company_symbol[i], company_name[i],x,'MySQL',txtime.strftime('%Y-%m-%d %H:%M:%S')))
                 cnx.commit()
                 cursor.close()
