@@ -95,7 +95,9 @@ curl -X POST -H "Content-Type: application/json" --data '
      "key.converter":"org.apache.kafka.connect.json.JsonConverter",
      "key.converter.schemas.enable":false,
      "value.converter":"org.apache.kafka.connect.json.JsonConverter",
-     "value.converter.schemas.enable":false
+     "value.converter.schemas.enable":false,
+     "timeseries.timefield":"tx_time",
+     "timeseries.timefield.auto.convert":"true"
 }}' http://localhost:8083/connectors -w "\n"
 
 echo "\nAdding MongoDB Kafka Sink Connector for the MySQL topic into the 'stocks.stockdata' collection in Atlas"
