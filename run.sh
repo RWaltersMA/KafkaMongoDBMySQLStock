@@ -52,7 +52,7 @@ test_systems_available 8083
 trap clean_up EXIT
 
 echo -e "\nConfiguring the MongoDB ReplicaSet...\n"
-docker-compose exec mongo1 /usr/bin/mongosh --eval '''rsconf = { _id : "rs0", members: [ { _id : 0, host : "mongo1:27017", priority: 1.0 }]};
+docker-compose exec mongo1 /usr/bin/mongo --eval '''rsconf = { _id : "rs0", members: [ { _id : 0, host : "mongo1:27017", priority: 1.0 }]};
 rs.initiate(rsconf);'''
 
 echo "\nCleaning up local MongoDB databases (dropping Stocks database):"
